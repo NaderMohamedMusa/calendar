@@ -7,9 +7,9 @@ This project demonstrates a modular, scalable Flutter application structure.
 
 ## Screenshots
 
-| Home Screen | Calendar Screen |
-|-------------|----------------|
-| ![Home Screen](assets/images/home_screen.png) | ![Calendar Screen](assets/images/calendar_screen.png) |
+| Home Screen                                           | Calendar Screen                                     |
+|-------------------------------------------------------|-----------------------------------------------------|
+| ![Calendar Month](assets/images/Calendar_-_Month.png) | ![Calendar week](assets/images/Calendar_-_Week.png) |
 
 ---
 
