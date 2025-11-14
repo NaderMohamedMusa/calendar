@@ -21,12 +21,13 @@ class _CalendarScreenContent extends StatelessWidget {
       backgroundColor: const Color(0xFF005C5B),
       body: Column(
         children: [
-          SizedBox(height: 12),
+          SizedBox(height: 30),
+          /// --- Header ---
           Row(
             children: [
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.arrow_back, color: Colors.white,size: 16),
+                icon: const Icon(Icons.arrow_back, color: Colors.white, size: 16),
               ),
               const SizedBox(width: 16),
               Text(
@@ -40,27 +41,117 @@ class _CalendarScreenContent extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 12),
-
           Expanded(
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(16),topRight: Radius.circular(16)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
               ),
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  const SizedBox(height: 12),
+
+                  /// ------------------------------
+                  /// New Tabs Instead of Button
+                  /// ------------------------------
+                  BlocBuilder<CalendarCubit, CalendarState>(
+                    builder: (context, state) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _CalendarTab(
+                              title: "شهري",
+                              selected: !state.isWeek,
+                              onTap: () => context.read<CalendarCubit>().setView(isWeek: false),
+                            ),
+                            const SizedBox(width: 12),
+                            _CalendarTab(
+                              title: "اسبوعي",
+                              selected: state.isWeek,
+                              onTap: () => context.read<CalendarCubit>().setView(isWeek: true),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  /// ---- Calendar ----
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
                     child: CalendarCard(),
                   ),
-                  SizedBox(height: 12),
+
+                  const SizedBox(height: 10),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        Text("الوقت", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                        const SizedBox(width: 35),
+                        Text("الجلسة", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+
                   Expanded(child: SessionsArea()),
                 ],
               ),
             ),
-          )
+          ),
         ],
+      ),
+    );
+  }
+}
+
+/// -----------------------------------------
+/// Custom Tab Widget (Month / Week)
+/// -----------------------------------------
+class _CalendarTab extends StatelessWidget {
+  final String title;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _CalendarTab({
+    required this.title,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(vertical: 6,horizontal: 60),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: selected
+                  ? const Color(0xFF22BDB7)
+                  : Colors.transparent,
+              width: 2,
+            ),
+          )
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: selected ? Colors.black : Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
       ),
     );
   }

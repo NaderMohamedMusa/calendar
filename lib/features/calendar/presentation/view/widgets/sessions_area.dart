@@ -11,18 +11,23 @@ class SessionsArea extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: ListView.separated(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: ListView.builder(
             itemCount: state.sessions.length,
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
               final s = state.sessions[index];
-              return Row(
-                children: [
-                  Container(
-                      width: 110,
+              return IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      width: 50,
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             _formatTime(s.startTime),
@@ -37,14 +42,25 @@ class SessionsArea extends StatelessWidget {
                             ),
                           ),
                         ],
-                      )
-                  ),
+                      ),
+                    ),
 
-                  const SizedBox(width: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: VerticalDivider(
+                        color: Colors.grey.withOpacity(0.5),
+                        thickness: 2,
+                        width: 10,
+                      ),
+                    ),
 
-                  SessionCard(session: s),
-                ],
+                    Expanded(
+                      child: SessionCard(session: s),
+                    ),
+                  ],
+                ),
               );
+
             },
           ),
         );

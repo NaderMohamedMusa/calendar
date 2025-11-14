@@ -13,6 +13,7 @@ class CalendarRemoteDatasource {
         caseType: 'ربط وغرامة',
         startTime: start,
         endTime: end,
+        isActive: i == 0,
       );
     });
   }

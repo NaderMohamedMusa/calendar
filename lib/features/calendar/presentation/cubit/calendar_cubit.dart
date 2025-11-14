@@ -10,8 +10,8 @@ class CalendarCubit extends Cubit<CalendarState> {
     loadSessions(state.selectedDay);
   }
 
-  void toggleView() {
-    emit(state.copyWith(isWeek: !state.isWeek));
+  void setView({required bool isWeek}) {
+    emit(state.copyWith(isWeek: isWeek));
   }
 
   void changeDay(DateTime day) async {
