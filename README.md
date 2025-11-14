@@ -1,16 +1,45 @@
-# nader_mohamed_task
+# Nader Mohamed Task
 
-A new Flutter project.
+A Flutter project built using **Clean Architecture** principles.  
+This project demonstrates a modular, scalable Flutter application structure.
+
+---
+
+## Screenshots
+
+| Home Screen | Calendar Screen |
+|-------------|----------------|
+| ![Home Screen](assets/images/home_screen.png) | ![Calendar Screen](assets/images/calendar_screen.png) |
+
+---
+
+## Features
+
+- Clean Architecture with separation of **Presentation**, **Domain**, and **Data** layers
+- State management using **Bloc/Cubit**
+- Localization support
+- Responsive design for **mobile**, **tablet**, and **desktop**
+- Network handling with proper error handling
+
+---
+
+## Packages Used
+
+Here is a list of the main packages used in this project:
+
+- [`flutter_bloc`](https://pub.dev/packages/flutter_bloc) - State management using Bloc/Cubit
+- [`get_it`](https://pub.dev/packages/get_it) - Dependency injection
+- [`table_calendar`](https://pub.dev/packages/table_calendar) - Calendar widget
+- [`reactive_forms`](https://pub.dev/packages/reactive_forms) - Form handling
+- [`responsive_framework`](https://pub.dev/packages/responsive_framework) - Responsive design
+- [`dio`](https://pub.dev/packages/dio) - Network requests
+
+---
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this project locally:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/nader_mohamed_task.git
