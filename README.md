@@ -36,9 +36,9 @@ This project demonstrates a modular, scalable Flutter application structure.
 
 ## Clean Architecture Hierarchy
 
-lib/
-│
-├── core/
+- lib/
+- │
+- ├── core/
 │ ├── error/
 │ │ └── failures.dart
 │ ├── usecases/
