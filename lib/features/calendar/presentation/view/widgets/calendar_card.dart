@@ -23,6 +23,8 @@ class CalendarCard extends StatelessWidget {
               pageAnimationEnabled: true,
               daysOfWeekVisible: !state.isWeek,
               headerVisible: !state.isWeek,
+              daysOfWeekHeight: 32, // height for the day-of-week row
+              rowHeight: 70, // height for each week row (increase this)
               calendarFormat: state.isWeek
                   ? CalendarFormat.week
                   : CalendarFormat.month,
@@ -86,10 +88,10 @@ class CalendarCard extends StatelessWidget {
                           style: TextStyle(
                             color: isSelected ? Colors.white : Colors.grey,
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 12),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 14),
                           decoration: BoxDecoration(
@@ -102,7 +104,7 @@ class CalendarCard extends StatelessWidget {
                             date.day.toString(),
                             style: TextStyle(
                               color: isSelected ? Colors.white : Colors.black87,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -120,10 +122,10 @@ class CalendarCard extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height:12),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 14),
                           decoration: BoxDecoration(
@@ -134,7 +136,7 @@ class CalendarCard extends StatelessWidget {
                             date.day.toString(),
                             style: TextStyle(
                               color: Colors.black87,
-                              fontSize: 12,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -166,5 +168,4 @@ class CalendarCard extends StatelessWidget {
     ];
     return names[date.weekday % 7];
   }
-
 }
