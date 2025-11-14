@@ -18,145 +18,141 @@ class _CalendarScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('التقويم'),
-        backgroundColor: const Color(0xFF005C5B),
-        elevation: 0,
-        titleTextStyle: const TextStyle(color: Colors.white),
-        leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.arrow_back,color: Colors.white)
-        ),
-      ),
+      backgroundColor: const Color(0xFF005C5B),
       body: Column(
-        children: const [
-          SizedBox(height: 12),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: _CalendarCard()),
-          SizedBox(height: 12),
-          Expanded(child: _SessionsArea()),
+        children: [
+          SizedBox(height: 30),
+          /// --- Header ---
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.arrow_back, color: Colors.white, size: 16),
+              ),
+              const SizedBox(width: 16),
+              Text(
+                "التقويم",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                ),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 12),
+
+                  /// ------------------------------
+                  /// New Tabs Instead of Button
+                  /// ------------------------------
+                  BlocBuilder<CalendarCubit, CalendarState>(
+                    builder: (context, state) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            _CalendarTab(
+                              title: "شهري",
+                              selected: !state.isWeek,
+                              onTap: () => context.read<CalendarCubit>().setView(isWeek: false),
+                            ),
+                            const SizedBox(width: 12),
+                            _CalendarTab(
+                              title: "اسبوعي",
+                              selected: state.isWeek,
+                              onTap: () => context.read<CalendarCubit>().setView(isWeek: true),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  /// ---- Calendar ----
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: CalendarCard(),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        Text("الوقت", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                        const SizedBox(width: 35),
+                        Text("الجلسة", style: TextStyle(color: Colors.grey, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+
+                  Expanded(child: SessionsArea()),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-class _CalendarCard extends StatelessWidget {
-  const _CalendarCard();
+/// -----------------------------------------
+/// Custom Tab Widget (Month / Week)
+/// -----------------------------------------
+class _CalendarTab extends StatelessWidget {
+  final String title;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _CalendarTab({
+    required this.title,
+    required this.selected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CalendarCubit, CalendarState>(builder: (context, state) {
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  const Expanded(child: Text('')), // placeholder for tabs
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: const Color(0xFFEFF7F6), borderRadius: BorderRadius.circular(12)),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => context.read<CalendarCubit>().toggleView(),
-                          child: Text(state.isWeek ? 'اسبوعي' : 'شهري', style: const TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                        const SizedBox(width: 8),
-                        IconButton(
-                          onPressed: () => context.read<CalendarCubit>().toggleView(),
-                          icon: const Icon(Icons.swap_horiz),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 8),
-              TableCalendar(
-                locale: 'ar',
-                focusedDay: state.selectedDay,
-                firstDay: DateTime(2000),
-                lastDay: DateTime(2100),
-                calendarFormat: state.isWeek ? CalendarFormat.week : CalendarFormat.month,
-                startingDayOfWeek: StartingDayOfWeek.saturday,
-                selectedDayPredicate: (day) => isSameDay(day, state.selectedDay),
-                onDaySelected: (selectedDay, focusedDay) {
-                  context.read<CalendarCubit>().changeDay(selectedDay);
-                },
-                headerStyle: const HeaderStyle(formatButtonVisible: false, titleCentered: true, leftChevronVisible: true, rightChevronVisible: true),
-                calendarStyle: CalendarStyle(
-                  selectedDecoration: BoxDecoration(color: Color(0xFF22BDB7), shape: BoxShape.circle),
-                  todayDecoration: BoxDecoration(color: Colors.transparent, shape: BoxShape.circle),
-                  markerDecoration: BoxDecoration(color: Color(0xFF22BDB7), shape: BoxShape.circle),
-                  markersMaxCount: 3,
-                ),
-                eventLoader: (day) {
-                  if ([5, 12, 14, 19, 24].contains(day.day)) return ['x'];
-                  return const <String>[];
-                },
-              ),
-            ],
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(vertical: 6,horizontal: 60),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: selected
+                  ? const Color(0xFF22BDB7)
+                  : Colors.transparent,
+              width: 2,
+            ),
+          )
+        ),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: selected ? Colors.black : Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
-      );
-    });
-  }
-}
-
-class _SessionsArea extends StatelessWidget {
-  const _SessionsArea();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CalendarCubit, CalendarState>(builder: (context, state) {
-      if (state.loading) return const Center(child: CircularProgressIndicator());
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: ListView.separated(
-                itemCount: state.sessions.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final s = state.sessions[index];
-                  return SessionCard(session: s);
-                },
-              ),
-            ),
-            const SizedBox(width: 8),
-            Container(
-              width: 110,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: ListView.separated(
-                itemCount: state.sessions.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 12),
-                itemBuilder: (context, index) {
-                  final s = state.sessions[index];
-                  return Column(
-                    children: [
-                      Text(_formatTime(s.startTime), style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 4),
-                      Text(_formatTime(s.endTime), style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                    ],
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      );
-    });
-  }
-
-  String _formatTime(DateTime t) {
-    final String hour = t.hour.toString().padLeft(2, '0');
-    final String minute = t.minute.toString().padLeft(2, '0');
-    return '$hour:$minute';
+      ),
+    );
   }
 }

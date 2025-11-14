@@ -13,6 +13,5 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:nader_mohamed_task/core/di/service_locator.dart';
 export 'package:table_calendar/table_calendar.dart';
 export 'package:nader_mohamed_task/features/calendar/presentation/view/widgets/session_card.dart';
-
-
-
+export 'package:nader_mohamed_task/features/calendar/presentation/view/widgets/calendar_card.dart';
+export 'package:nader_mohamed_task/features/calendar/presentation/view/widgets/sessions_area.dart';
