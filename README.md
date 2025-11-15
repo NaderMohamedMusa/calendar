@@ -74,7 +74,7 @@ This project demonstrates a modular, scalable Flutter application structure.
 - │ ├── cubit/
 - │ │ ├── calendar_cubit.dart
 - │ │ └── calendar_state.dart
-- │ ├── pages/
+- │ ├── view/
 - │ │ └── calendar_page.dart
 - │ ├── widgets/
 - │ │ ├── month_view.dart
