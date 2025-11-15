@@ -39,52 +39,52 @@ This project demonstrates a modular, scalable Flutter application structure.
 - lib/
 - │
 - ├── core/
-│ ├── error/
-│ │ └── failures.dart
-│ ├── usecases/
-│ │ └── usecase.dart
-│ ├── utils/
-│ │ └── date_utils.dart
-│ └── theme/
-│ └── app_theme.dart
-│
-├── features/
-│ └── calendar/
-│ ├── domain/
-│ │ ├── entities/
-│ │ │ ├── session_entity.dart
-│ │ │ └── calendar_day_entity.dart
-│ │ ├── repositories/
-│ │ │ └── calendar_repository.dart
-│ │ └── usecases/
-│ │ ├── get_month_days.dart
-│ │ ├── get_week_days.dart
-│ │ └── get_sessions_for_day.dart
-│ │
-│ ├── data/
-│ │ ├── models/
-│ │ │ ├── session_model.dart
-│ │ │ └── calendar_day_model.dart
-│ │ ├── datasources/
-│ │ │ └── calendar_local_datasource.dart
-│ │ └── repositories/
-│ │ └── calendar_repository_impl.dart
-│ │
-│ └── presentation/
-│ ├── cubit/
-│ │ ├── calendar_cubit.dart
-│ │ └── calendar_state.dart
-│ ├── pages/
-│ │ └── calendar_page.dart
-│ ├── widgets/
-│ │ ├── month_view.dart
-│ │ ├── week_view.dart
-│ │ ├── session_card.dart
-│ │ └── day_item.dart
-│ └── styles/
-│ └── calendar_colors.dart
-│
-└── main.dart
+- │ ├── error/
+- │ │ └── failures.dart
+- │ ├── usecases/
+- │ │ └── usecase.dart
+- │ ├── utils/
+- │ │ └── date_utils.dart
+- │ └── theme/
+- │ └── app_theme.dart
+- │
+- ├── features/
+- │ └── calendar/
+- │ ├── domain/
+- │ │ ├── entities/
+- │ │ │ ├── session_entity.dart
+- │ │ │ └── calendar_day_entity.dart
+- │ │ ├── repositories/
+- │ │ │ └── calendar_repository.dart
+- │ │ └── usecases/
+- │ │ ├── get_month_days.dart
+- │ │ ├── get_week_days.dart
+- │ │ └── get_sessions_for_day.dart
+- │ │
+- │ ├── data/
+- │ │ ├── models/
+- │ │ │ ├── session_model.dart
+- │ │ │ └── calendar_day_model.dart
+- │ │ ├── datasources/
+- │ │ │ └── calendar_local_datasource.dart
+- │ │ └── repositories/
+- │ │ └── calendar_repository_impl.dart
+- │ │
+- │ └── presentation/
+- │ ├── cubit/
+- │ │ ├── calendar_cubit.dart
+- │ │ └── calendar_state.dart
+- │ ├── pages/
+- │ │ └── calendar_page.dart
+- │ ├── widgets/
+- │ │ ├── month_view.dart
+- │ │ ├── week_view.dart
+- │ │ ├── session_card.dart
+- │ │ └── day_item.dart
+- │ └── styles/
+- │ └── calendar_colors.dart
+- │
+- └── main.dart
 
 
 ### Layers Explained
